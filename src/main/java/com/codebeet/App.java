@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.Properties;
 
 /**
@@ -21,7 +22,8 @@ public class App {
         logger.info("시작");
         logger.info("================================================================");
 
-        String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+        String rootPath = Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource(""))
+                                 .getPath();
         String appConfigPath = rootPath + "config.properties";
 
         Properties properties = new Properties();
