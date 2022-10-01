@@ -60,8 +60,7 @@ class AppTest {
         //        long mintues = 230; // 04:00
         //        long mintues = 290; // 03:00
         //        long mintues = 350; // 02:00
-        long mintues = 380; // 01:30
-        //        long mintues = 380;
+        long mintues = 360; // 01:40
 
         long secondsTo = calculateSeconds("320000");
         long secondsFrom = secondsTo -
