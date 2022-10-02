@@ -1,13 +1,8 @@
 package com.codebeet.schedule;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.List;
 
 public class Backward {
-
-    private static final Logger logger = LoggerFactory.getLogger(Backward.class);
 
     public long getTotalBreakTimeBetweenFromAndTo(List<BreakTime> breakTimes, int firstIndex, long secondsFrom,
                                                   long secondsTo) {
@@ -18,24 +13,22 @@ public class Backward {
 
         int backIndex = breakTimes.size() - firstIndex - 1;
         int index = 0;
-        for (int i = backIndex; i > 0; i--) {
+        for (int i = backIndex; i >= 0; i--) {
             BreakTime breakTime = breakTimes.get(i);
-            if (secondsTo < breakTime.getSecondsTo()) {
-                secondsTo = breakTime.getSecondsFrom() - 10;
-                continue;
-            }
+            if (secondsTo > breakTime.getSecondsTo()) {
 
-            if (breakTime.getSecondsTo() - adjSecondsFrom == 0) {
-                continue;
-            }
+                if (breakTime.getSecondsTo() - adjSecondsFrom == 0) {
+                    continue;
+                }
 
-            long diffSeconds = breakTime.getSecondsTo() - adjSecondsFrom;
+                long diffSeconds = breakTime.getSecondsTo() - adjSecondsFrom;
 
-            if (diffSeconds > 0 || (breakTime.getTotalSeconds() - Math.abs(diffSeconds)) >= 0) {
-                totalSeconds += breakTime.getTotalSeconds();
-                adjSecondsFrom -= breakTime.getTotalSeconds();
-                adjSecondsTo = breakTime.getSecondsFrom() - 10;
-                index = i;
+                if (diffSeconds > 0 || (breakTime.getTotalSeconds() - Math.abs(diffSeconds)) > 0) {
+                    totalSeconds += breakTime.getTotalSeconds();
+                    adjSecondsFrom -= breakTime.getTotalSeconds();
+                    adjSecondsTo = breakTime.getSecondsFrom() - 10;
+                    index = i;
+                }
             }
         }
 

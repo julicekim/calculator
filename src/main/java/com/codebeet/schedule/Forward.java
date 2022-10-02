@@ -8,40 +8,47 @@ public class Forward {
                                                   long secondsTo) {
 
         long totalSeconds = 0;
-        long adjSecondsFrom = 0;
+        long adjSecondsFrom = secondsFrom;
+        long adjSecondsTo = secondsTo;
 
-        int lastIndex = -1;
+        int index = 0;
         for (int i = firstIndex; i < breakTimes.size(); i++) {
 
             BreakTime breakTime = breakTimes.get(i);
             if (breakTime.getSecondsFrom() > secondsFrom && secondsFrom <= breakTime.getSecondsTo()) {
-                if (breakTime.getSecondsFrom() - secondsTo == 0) {
+                if (breakTime.getSecondsFrom() - adjSecondsTo == 0) {
                     continue;
                 }
 
-                long diffSeconds = secondsTo - breakTime.getSecondsTo();
+                long diffSeconds = adjSecondsTo - breakTime.getSecondsFrom();
 
                 if (diffSeconds > 0 || (breakTime.getTotalSeconds() - Math.abs(diffSeconds) >= 0)) {
                     totalSeconds += breakTime.getTotalSeconds();
+                    adjSecondsTo += breakTime.getTotalSeconds();
                     adjSecondsFrom = breakTime.getSecondsTo() + 10;
-                    lastIndex = i + 1;
+                    index = i;
                 }
             }
         }
 
-        long adjSecondsTo = secondsTo + totalSeconds;
+        if (index == 0) {
+            return totalSeconds;
+        }
 
-        if (lastIndex > -1 && lastIndex <= breakTimes.size() - 1) {
-            long seconds = 0;
-            while (true) {
-                seconds = getTotalBreakTimeBetweenFromAndTo(breakTimes, lastIndex, adjSecondsFrom, adjSecondsTo);
-                if (seconds == 0L) {
-                    break;
-                }
-                totalSeconds += seconds;
-                adjSecondsTo += seconds;
-                adjSecondsFrom = breakTimes.get(lastIndex).getSecondsTo() + 10;
+        adjSecondsTo = secondsTo + totalSeconds;
+
+        List<BreakTime> subBreakTimes = breakTimes.subList(index + 1, breakTimes.size());
+
+        long subTotalSeconds = 0;
+        while (true) {
+            subTotalSeconds = getTotalBreakTimeBetweenFromAndTo(subBreakTimes, 0, adjSecondsFrom, adjSecondsTo);
+            if (subTotalSeconds == 0) {
+                break;
             }
+            adjSecondsFrom = adjSecondsTo + 10;
+
+            totalSeconds += subTotalSeconds;
+            adjSecondsTo += subTotalSeconds;
         }
 
         return totalSeconds;

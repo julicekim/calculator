@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class AppTest {
 
     private static final Logger logger = LoggerFactory.getLogger(AppTest.class);
@@ -20,7 +22,7 @@ class AppTest {
     @Test
     void forward() {
         List<BreakTime> breakTimes = getBreakTimes();
-        long mintues = 0;
+        //        long mintues = 0;
 
         //        long mintues = 240; // 13:10
         //        long mintues = 340; // 14:50
@@ -28,7 +30,9 @@ class AppTest {
         //        long mintues = 670; // 21:00
         //        long mintues = 920; // 02:10
         //        long mintues = 1150; // 06:00
-        //        long mintues = 1160; // 06:00
+        //        long mintues = 1160; // 06:20
+        //        long mintues = 1200; // 07:00
+        long mintues = 1260; // 08:00
 
         long secondsFrom = calculateSeconds("080000");
         long secondsTo = secondsFrom +
@@ -45,6 +49,7 @@ class AppTest {
 
         logger.info("시작시간 : {}", dateTime);
         logger.info("총 휴식 시간 : {} 초", totalBreakTimes);
+        assertEquals(10800, totalBreakTimes);
         logger.info("종료시간 : {}", dateTime.plusSeconds(totalBreakTimes));
     }
 
@@ -60,7 +65,25 @@ class AppTest {
         //        long mintues = 230; // 04:00
         //        long mintues = 290; // 03:00
         //        long mintues = 350; // 02:00
-        long mintues = 360; // 01:40
+        //        long mintues = 360; // 00:50
+        //        long mintues = 410; // 00:00
+        //        long mintues = 470; // 23:00
+        //        long mintues = 530; // 22:00
+        //        long mintues = 590; // 21:00
+        //        long mintues = 650; // 20:00
+        //        long mintues = 710; // 19:00
+        //        long mintues = 770; // 18:00
+        //        long mintues = 800; // 17:30
+        //        long mintues = 810; // 16:50
+        //        long mintues = 860; // 16:00
+        //        long mintues = 920; // 15:00
+        //        long mintues = 930; // 14:40
+        //        long mintues = 970; // 14:00
+        //        long mintues = 1030; // 13:00
+        //        long mintues = 1040; // 11:50
+        //        long mintues = 1090; // 11:00
+        //        long mintues = 1150; // 10:00
+        long mintues = 1160; // 10:00
 
         long secondsTo = calculateSeconds("320000");
         long secondsFrom = secondsTo -
@@ -77,6 +100,7 @@ class AppTest {
 
         logger.info("시작시간 : {}", dateTime);
         logger.info("총 휴식 시간 : {} 초", totalBreakTimes);
+        assertEquals(10800, totalBreakTimes);
         logger.info("종료시간 : {}", dateTime.minusSeconds(totalBreakTimes));
 
     }
