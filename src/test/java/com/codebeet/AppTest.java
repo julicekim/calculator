@@ -49,8 +49,9 @@ class AppTest {
 
         logger.info("시작시간 : {}", dateTime);
         logger.info("총 휴식 시간 : {} 초", totalBreakTimes);
-        assertEquals(10800, totalBreakTimes);
         logger.info("종료시간 : {}", dateTime.plusSeconds(totalBreakTimes));
+
+        assertEquals(10800, totalBreakTimes);
     }
 
     @Test
@@ -83,7 +84,9 @@ class AppTest {
         //        long mintues = 1040; // 11:50
         //        long mintues = 1090; // 11:00
         //        long mintues = 1150; // 10:00
-        long mintues = 1160; // 10:00
+        //        long mintues = 1160; // 09:40
+        //        long mintues = 1200; // 09:00
+        long mintues = 1260; // 09:00
 
         long secondsTo = calculateSeconds("320000");
         long secondsFrom = secondsTo -
@@ -100,8 +103,8 @@ class AppTest {
 
         logger.info("시작시간 : {}", dateTime);
         logger.info("총 휴식 시간 : {} 초", totalBreakTimes);
-        assertEquals(10800, totalBreakTimes);
         logger.info("종료시간 : {}", dateTime.minusSeconds(totalBreakTimes));
+        assertEquals(10800, totalBreakTimes);
 
     }
 
