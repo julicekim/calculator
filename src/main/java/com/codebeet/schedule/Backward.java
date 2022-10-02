@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Backward {
 
-    public long getTotalBreakTimeBetweenFromAndTo(List<BreakTime> breakTimes, long secondsFrom,
-                                                  long secondsTo) {
+    public long calculateTotalBreakTimeBetweenFromAndTo(List<BreakTime> breakTimes, long secondsFrom,
+                                                        long secondsTo) {
 
         long totalSeconds = 0;
         long adjSecondsFrom = secondsFrom;
@@ -40,7 +40,7 @@ public class Backward {
 
         long subTotalSeconds = 0;
         while (true) {
-            subTotalSeconds = getTotalBreakTimeBetweenFromAndTo(subBreakTimes, adjSecondsFrom, adjSecondsTo);
+            subTotalSeconds = calculateTotalBreakTimeBetweenFromAndTo(subBreakTimes, adjSecondsFrom, adjSecondsTo);
             if (subTotalSeconds == 0) {
                 break;
             }

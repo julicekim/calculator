@@ -9,9 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -45,7 +45,7 @@ class AppTest {
 
         Forward forward = new Forward();
 
-        long totalBreakTimes = forward.getTotalBreakTimeBetweenFromAndTo(breakTimes, secondsFrom, secondsTo);
+        long totalBreakTimes = forward.calculateTotalBreakTimeBetweenFromAndTo(breakTimes, secondsFrom, secondsTo);
 
         logger.info("시작시간 : {}", dateTime);
         logger.info("총 휴식 시간 : {} 초", totalBreakTimes);
@@ -99,13 +99,12 @@ class AppTest {
 
         Backward backward = new Backward();
 
-        long totalBreakTimes = backward.getTotalBreakTimeBetweenFromAndTo(breakTimes, secondsFrom, secondsTo);
+        long totalBreakTimes = backward.calculateTotalBreakTimeBetweenFromAndTo(breakTimes, secondsFrom, secondsTo);
 
         logger.info("시작시간 : {}", dateTime);
         logger.info("총 휴식 시간 : {} 초", totalBreakTimes);
         logger.info("종료시간 : {}", dateTime.minusSeconds(totalBreakTimes));
         assertEquals(10800, totalBreakTimes);
-
     }
 
     long calculateSeconds(String times) {
@@ -152,7 +151,7 @@ class AppTest {
                 .timeTo("301000")
                 .build();
 
-        return new ArrayList<>(
+        return new CopyOnWriteArrayList<>(
                 Arrays.asList(breakTime1, breakTime2, breakTime3, breakTime4, breakTime5, breakTime6));
 
     }
