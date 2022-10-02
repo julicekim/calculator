@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Forward {
 
-    public long getTotalBreakTimeBetweenFromAndTo(List<BreakTime> breakTimes, int firstIndex, long secondsFrom,
+    public long getTotalBreakTimeBetweenFromAndTo(List<BreakTime> breakTimes, long secondsFrom,
                                                   long secondsTo) {
 
         long totalSeconds = 0;
@@ -12,7 +12,7 @@ public class Forward {
         long adjSecondsTo = secondsTo;
 
         int index = 0;
-        for (int i = firstIndex; i < breakTimes.size(); i++) {
+        for (int i = 0; i < breakTimes.size(); i++) {
 
             BreakTime breakTime = breakTimes.get(i);
             if (breakTime.getSecondsFrom() > secondsFrom && secondsFrom <= breakTime.getSecondsTo()) {
@@ -41,7 +41,7 @@ public class Forward {
 
         long subTotalSeconds = 0;
         while (true) {
-            subTotalSeconds = getTotalBreakTimeBetweenFromAndTo(subBreakTimes, 0, adjSecondsFrom, adjSecondsTo);
+            subTotalSeconds = getTotalBreakTimeBetweenFromAndTo(subBreakTimes, adjSecondsFrom, adjSecondsTo);
             if (subTotalSeconds == 0) {
                 break;
             }

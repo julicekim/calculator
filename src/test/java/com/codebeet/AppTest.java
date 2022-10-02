@@ -45,7 +45,7 @@ class AppTest {
 
         Forward forward = new Forward();
 
-        long totalBreakTimes = forward.getTotalBreakTimeBetweenFromAndTo(breakTimes, 0, secondsFrom, secondsTo);
+        long totalBreakTimes = forward.getTotalBreakTimeBetweenFromAndTo(breakTimes, secondsFrom, secondsTo);
 
         logger.info("시작시간 : {}", dateTime);
         logger.info("총 휴식 시간 : {} 초", totalBreakTimes);
@@ -99,7 +99,7 @@ class AppTest {
 
         Backward backward = new Backward();
 
-        long totalBreakTimes = backward.getTotalBreakTimeBetweenFromAndTo(breakTimes, 0, secondsFrom, secondsTo);
+        long totalBreakTimes = backward.getTotalBreakTimeBetweenFromAndTo(breakTimes, secondsFrom, secondsTo);
 
         logger.info("시작시간 : {}", dateTime);
         logger.info("총 휴식 시간 : {} 초", totalBreakTimes);
