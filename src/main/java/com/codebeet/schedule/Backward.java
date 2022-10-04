@@ -17,13 +17,9 @@ public class Backward {
             BreakTime breakTime = breakTimes.get(i);
             if (secondsTo > breakTime.getSecondsTo()) {
 
-                if (breakTime.getSecondsTo() - adjSecondsFrom == 0) {
-                    continue;
-                }
+                long diffSeconds = breakTime.getSecondsTo() - Math.max(adjSecondsFrom, breakTime.getSecondsFrom());
 
-                long diffSeconds = breakTime.getSecondsTo() - adjSecondsFrom;
-
-                if (diffSeconds > 0 || (breakTime.getTotalSeconds() - Math.abs(diffSeconds)) > 0) {
+                if (diffSeconds >= 0 && breakTime.getTotalSeconds() - diffSeconds >= 0) {
                     totalSeconds += breakTime.getTotalSeconds();
                     adjSecondsFrom -= breakTime.getTotalSeconds();
                     adjSecondsTo = breakTime.getSecondsFrom() - 10;
