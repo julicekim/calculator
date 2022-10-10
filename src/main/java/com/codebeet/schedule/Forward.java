@@ -15,19 +15,12 @@ public class Forward {
         for (int i = 0; i < breakTimes.size(); i++) {
 
             BreakTime breakTime = breakTimes.get(i);
-            if (breakTime.getSecondsFrom() > secondsFrom && secondsFrom <= breakTime.getSecondsTo()) {
-                if (breakTime.getSecondsFrom() - adjSecondsTo == 0) {
-                    continue;
-                }
+            if (adjSecondsTo >= breakTime.getSecondsTo()) {
 
-                long diffSeconds = adjSecondsTo - breakTime.getSecondsFrom();
-
-                if (diffSeconds > 0 || (breakTime.getTotalSeconds() - Math.abs(diffSeconds) >= 0)) {
-                    totalSeconds += breakTime.getTotalSeconds();
-                    adjSecondsTo += breakTime.getTotalSeconds();
-                    adjSecondsFrom = breakTime.getSecondsTo() + 10;
-                    index = i;
-                }
+                totalSeconds += breakTime.getTotalSeconds();
+                adjSecondsTo += breakTime.getTotalSeconds();
+                adjSecondsFrom = breakTime.getSecondsTo() + 10;
+                index = i;
             }
         }
 

@@ -9,22 +9,17 @@ public class Backward {
 
         long totalSeconds = 0;
         long adjSecondsFrom = secondsFrom;
-        long adjSecondsTo = 0;
+        long adjSecondsTo = secondsTo;
 
         int backIndex = breakTimes.size() - 1;
         int index = 0;
         for (int i = backIndex; i >= 0; i--) {
             BreakTime breakTime = breakTimes.get(i);
-            if (secondsTo > breakTime.getSecondsTo()) {
-
-                long diffSeconds = breakTime.getSecondsTo() - Math.max(adjSecondsFrom, breakTime.getSecondsFrom());
-
-                if (diffSeconds >= 0 && breakTime.getTotalSeconds() - diffSeconds >= 0) {
-                    totalSeconds += breakTime.getTotalSeconds();
-                    adjSecondsFrom -= breakTime.getTotalSeconds();
-                    adjSecondsTo = breakTime.getSecondsFrom() - 10;
-                    index = i;
-                }
+            if (adjSecondsFrom <= breakTime.getSecondsTo()) {
+                totalSeconds += breakTime.getTotalSeconds();
+                adjSecondsFrom -= breakTime.getTotalSeconds();
+                adjSecondsTo = breakTime.getSecondsFrom() - 10;
+                index = i;
             }
         }
 

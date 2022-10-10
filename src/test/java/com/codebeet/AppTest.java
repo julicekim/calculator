@@ -22,7 +22,10 @@ class AppTest {
     @Test
     void forward() {
         List<BreakTime> breakTimes = getBreakTimes();
-        //        long minutes = 0;
+        //        long minutes = 60; // 09:00
+        //        long minutes = 120; // 10:10
+        //        long minutes = 170; // 11:00
+        long minutes = 200;
 
         //        long minutes = 240; // 13:10
         //        long minutes = 340; // 14:50
@@ -32,9 +35,9 @@ class AppTest {
         //        long minutes = 1150; // 06:00
         //        long minutes = 1160; // 06:20
         //        long minutes = 1200; // 07:00
-        long minutes = 1260; // 08:00
+        //        long minutes = 1260; // 08:00
 
-        long secondsFrom = calculateSeconds("080000");
+        long secondsFrom = calculateSeconds("113000");
         long secondsTo = secondsFrom +
                          TimeUnit.calculateSeconds(
                                  TimeUnit.MINUTE,
@@ -68,7 +71,7 @@ class AppTest {
         //        long minutes = 290; // 03:00
         //        long minutes = 340; // 02:10
         //        long minutes = 350; // 01:00
-        long minutes = 360; // 00:50
+        //        long minutes = 360; // 00:50
         //        long minutes = 410; // 00:00
         //        long minutes = 470; // 23:00
         //        long minutes = 530; // 22:00
@@ -76,7 +79,7 @@ class AppTest {
         //        long minutes = 650; // 20:00
         //        long minutes = 710; // 19:00
         //        long minutes = 770; // 18:00
-        //        long minutes = 790; // 18:00
+        //        long minutes = 790; // 17:40
         //        long minutes = 800; // 17:00
         //        long minutes = 810; // 16:50
         //        long minutes = 860; // 16:00
@@ -92,7 +95,7 @@ class AppTest {
         //        long minutes = 1150; // 09:50
         //        long minutes = 1160; // 09:40
         //        long minutes = 1200; // 09:00
-        //        long minutes = 1260; // 08:00
+        long minutes = 1260; // 08:00
 
         long secondsTo = calculateSeconds("320000");
         long secondsFrom = secondsTo -
